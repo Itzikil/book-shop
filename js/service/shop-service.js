@@ -5,24 +5,28 @@ const PAGE_SIZE = 5
 var gBooks
 var gFilterBy = {
     txt: '',
-    status: '',
+    minPrice: 0,
+    minRate: 0,
 }
 var gSort
 var gPageIdx = 0
 
 _createBooks()
-
 function getBooks() {
-    var books = gBooks
+    // var books = gBooks
+    var books = gBooks.filter(book =>  book.price >= gFilterBy.minPrice &&
+    book.rate >= gFilterBy.minRate)
+    // console.log(books);
     
     books = books.filter(book => book.title.toLowerCase().includes(gFilterBy.txt.toLowerCase()))
-
-    if (gFilterBy.status) {
-        var maxPrice = books.reduce((a, b) => {return (a.price > b.price) ? a : b})
-        var minRate = books.reduce((a, b) => {return (a.rate > b.rate) ? b : a})
-            if(gFilterBy.status === 'price')books = [maxPrice]
-            else if(gFilterBy.status === 'rate')books = [minRate]
-    }
+    
+    // if (gFilterBy.status) {
+    //     var maxPrice = books.reduce((a, b) => {return (a.price > b.price) ? a : b})
+    //     var minRate = books.reduce((a, b) => {return (a.rate > b.rate) ? b : a})
+    //         if(gFilterBy.status === 'price')books = [maxPrice]
+    //         else if(gFilterBy.status === 'rate')books = [minRate]
+    // }
+    
     // how to make it shorter
     if (gSort === 'Price')books.sort((a , b)=> a.price - b.price)
     if (gSort === 'Id')books.sort((a , b)=> a.id - b.id)
@@ -74,7 +78,7 @@ function _createBooks() {
 }
 
 function createBook(title, price) {
-    return { id: gBooks.length + 1, title, price, rate: 0, desc: makeLorem() }
+    return { id: gBooks.length + 1, title, price: 0, rate: 0, desc: makeLorem() }
 }
 
 function removeBook(bookId) {
@@ -112,8 +116,10 @@ function _saveBooksToStorage() {
     saveToStorage(STORAGE_KEY, gBooks)
 }
 
-function setBookFilter(status) {
-    gFilterBy.status = status
+function setBookFilter(filterBy) {
+    console.log(filterBy);
+    if (filterBy.minPrice !== undefined) gFilterBy.minPrice = filterBy.minPrice
+    if (filterBy.minRate !== undefined) gFilterBy.minRate = filterBy.minRate
     return gFilterBy
 }
 
@@ -141,6 +147,3 @@ function clickPage(page){
     gPageIdx = page -1
     return gPageIdx +1
 }
-// function pageIdx(){
-//     return gPageIdx
-// }

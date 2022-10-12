@@ -11,24 +11,24 @@ function renderBooks() {
     var strHTML = books.map(book =>
         `<tr>
         <td>${book.id}</td>
-        <td><img src="/imgs/book.png" alt="book"></td>
+        <td><img src="imgs/book.png" alt="book"></td>
         <td>${book.title}</td>
         <td>${book.price}</td>
-        <td><button class="read" onclick="onReadBook(${book.id})">${'Read'}</button></td>
-        <td><button class="update" onclick="onUpdateBook(${book.id})">${'Update'}</button></td>
-        <td><button class="delete" onclick="onRemoveBook(${book.id})">${'Delete'}</button></td>
+        <td><button class="btn btn-primary read" onclick="onReadBook(${book.id})">${'Read'}</button></td>
+        <td><button class="btn btn-warning update" onclick="onUpdateBook(${book.id})">${'Update'}</button></td>
+        <td><button class="btn btn-danger delete" onclick="onRemoveBook(${book.id})">${'Delete'}</button></td>
         </tr>`
     )
     var headHTML =
         `<th onclick="onSortBy(this.innerHTML)">Id</th>
-        <th>image</th>
+        <th>Image</th>
         <th onclick="onSortBy(this.innerHTML)">Title</th>
         <th onclick="onSortBy(this.innerHTML)">Price</th>
         <th colspan="3">Actions</th>`
 
     document.querySelector('thead').innerHTML = headHTML
     document.querySelector('tbody').innerHTML = strHTML.join('')
-    onPages()
+    onRenderPages()
 }
 
 function onRemoveBook(bookId) {
@@ -80,12 +80,11 @@ function rederUpdating(bookId) {
     var elModal = document.querySelector('.update-modal')
     elModal.innerHTML =
         `<form class="update-book" onsubmit="onUpdatingBook(event, ${bookId})">
+        <button onclick="onCloseUpdate()" type="button" class=" close btn-close btn-close-white" aria-label="Close"></button>
     Update the book's price
     <input type="text" name="updated-price">
-    <button class="add">add</button>
-    <button onclick="onCloseUpdate()" class="close">x</button>
+    <button class="btn btn-success add">Update</button>
     </form>`
-
 }
 
 function onCloseUpdate() {
@@ -98,26 +97,26 @@ function onReadBook(bookId) {
 }
 
 function onCloseModal() {
-    document.querySelector('.modal').classList.remove('open')
+    document.querySelector('.modal1').classList.remove('open')
 }
 
 function onRating(rate, bookId) {
     var book = rateBook(rate, +bookId)
     if (book) {
-        var elModal = document.querySelector('.modal')
+        var elModal = document.querySelector('.modal1')
         elModal.querySelector('.rate').innerHTML = book.rate
     }
 }
 
 function renderBookDetails(book) {
-    var elModal = document.querySelector('.modal')
+    var elModal = document.querySelector('.modal1')
 
     const strHtmls = `<h3></h3>
     <h4>Book rate</h4>
     <div class="rating">
-    <button onclick="onRating(-1,'${book.id}')">-</button>
+    <button class="btn btn-secondary mx-2" onclick="onRating(-1,'${book.id}')">-</button>
     <p class="rate"></p>
-    <button onclick="onRating(1,'${book.id}')">+</button>
+    <button class="btn btn-secondary mx-2" onclick="onRating(1,'${book.id}')">+</button>
     </div>
     <img src="/imgs/book.png" alt="book">
     <h5>Book Description</h5>
@@ -156,11 +155,11 @@ function onSortBy(value) {
     renderBooks()
 }
 
-function onPages() {
+function onRenderPages() {
     var numOfPages = pagesCount()
     var strHTML = ``
     for (var i = 1; i <= numOfPages; i++) {
-        strHTML += `<button class="page${i} page-num" onclick="onClickPage(${i})">${i}</button>`
+        strHTML += `<button class="btn btn-primary page${i} page-num" onclick="onClickPage(${i})">${i}</button>`
     }
     document.querySelector('.pages').innerHTML = strHTML
 }
@@ -177,9 +176,9 @@ function renderPageNum(currPage){
         document.querySelector('.perv-Page').disabled = true
     }else
     document.querySelector('.perv-Page').disabled = false
-    // if (currPage === 1) {
-    //     document.querySelector('.perv-Page').disabled = true
+    // if (currPage === pagesCount()) {
+    //     document.querySelector('.next-Page').disabled = true
     // }else
-    // document.querySelector('.perv-Page').disabled = false
+    // document.querySelector('.next-Page').disabled = false
     
 }

@@ -1,0 +1,147 @@
+body {
+    background-color: darkcyan;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    text-align: center;
+    padding-top: 5px;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 8px;
+}
+
+th {
+    cursor: pointer;
+}
+
+.modal {
+    background-color: rgb(3, 104, 104);
+    width: 200px;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    top: 0px;
+    right: -100%;
+    transition: .5s;
+}
+
+table {
+    background-color: rgb(189, 206, 206);
+    /* box-shadow: 2px 3px gray; */
+    margin: auto;
+    margin-bottom: 20px;
+    /* border-radius: 10px; */
+}
+
+.modal.open {
+    right: 0px;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    Justify-content: center;
+}
+
+.add-book {
+    color: lavender;
+    cursor: pointer;
+}
+
+.add-book:hover {
+    color: rgb(2, 2, 105);
+}
+
+button {
+    border-radius: 4px;
+    border: 0.5px solid gray;
+}
+
+button:hover {
+    background-color: azure
+}
+
+img {
+    width: 40px;
+}
+
+.new-book {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+
+    width: 150px;
+    background-color: rgb(35, 88, 185);
+    padding: 20px;
+    bottom: -100%;
+    transition: 0.8s;
+    border-radius: 3px;
+    /* right: 50%; */
+}
+
+.update-book {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+
+    width: 150px;
+    background-color: rgb(35, 88, 185);
+    padding: 20px;
+    bottom: -100%;
+    transition: 0.8s;
+    border-radius: 3px;
+    /* right: 50%; */
+}
+
+.open-update {
+    bottom: 0%;
+}
+
+.add {
+    width: 40px;
+    margin: auto;
+    margin-top: 5px;
+}
+
+.read {
+    background-color: rgb(0 81 204);
+}
+
+.update {
+    background-color: rgb(249 160 36);
+}
+
+.delete {
+    background-color: rgb(209 70 64);
+}
+
+.close {
+    position: absolute;
+    right: 0px;
+}
+
+.features {
+    display: flex;
+    flex-direction: row;
+    Justify-content: center;
+}
+
+.feature {
+    margin: 5px;
+}
+
+.pages {
+    display: inline;
+}
+.page-num{
+    color: rgb(44 161 224);
+    font-weight: bold;
+}

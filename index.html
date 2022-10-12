@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book shop</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+
+  <body onload="onInit()">
+    <h2>Book shop</h2>
+    <div class="features">
+      <h4 class="feature">Filters</h4>
+      <select class="feature" onchange="onSetFilterBy(this.value)">
+        <option value="">All</option>
+        <option value="rate">Rate</option>
+        <option value="price">Price</option>
+      </select>
+      <label>
+        <input class="feature"
+        type="text"
+        oninput="onSetFilterByTxt(this.value)"
+        placeholder="Search..."
+        />
+      </label>
+      <p onclick="onCreateBook()" class="add-book feature">create new book</p>
+    </div>
+
+    <table>
+      <thead></thead>
+      <tbody></tbody>
+    </table>
+    <button class="perv-Page" onclick="onNextPage(-1)">&lt;&lt;</button>
+    <div class="pages"></div>
+    <button class="next-Page" onclick="onNextPage(1)">>></button>
+    <div class="modal"></div>
+    
+    <form class="new-book" onsubmit="onAddBook(event)">
+      write the book's name
+      <input type="text" name="txt" />
+      add the book's price
+      <input type="text" name="price" />
+      <button class="add">add</button>
+    </form>
+    <div class="update-modal"></div>
+
+    <script src="js/service/utils.js"></script>
+    <script src="js/service/storage-service.js"></script>
+    <script src="js/service/shop-service.js"></script>
+    <script src="js/shop-controller.js"></script>
+  </body>
+</html>
